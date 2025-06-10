@@ -107,22 +107,24 @@ public class JavaMailUtil {
 	}
 
 	private static Message prepareMessage(Session session, String myAccountEmail, String recipientEmail, String subject,
-			String htmlTextMessage) {
+            String htmlTextMessage) {
+if (session == null || myAccountEmail == null || recipientEmail == null) {
+System.err.println("Missing essential parameters for prepareMessage.");
+return null;
+}
 
-		try {
+try {
+Message message = new MimeMessage(session);
+message.setFrom(new InternetAddress(myAccountEmail));
+message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
+message.setSubject(subject);
+message.setContent(htmlTextMessage, "text/html; charset=utf-8");
+return message;
+} catch (Exception exception) {
+exception.printStackTrace(); // TEMP: see real error in console
+Logger.getLogger(JavaMailUtil.class.getName()).log(Level.SEVERE, null, exception);
+}
+return null;
+}
 
-			Message message = new MimeMessage(session);
-
-			message.setFrom(new InternetAddress(myAccountEmail));
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
-			message.setSubject(subject);
-			message.setContent(htmlTextMessage, "text/html");
-			return message;
-
-		} catch (Exception exception) {
-			Logger.getLogger(JavaMailUtil.class.getName()).log(Level.SEVERE, null, exception);
-		}
-		return null;
-
-	}
 }

@@ -22,7 +22,8 @@
 	<!--Company Header Starting  -->
 	<div class="container-fluid text-center"
 		style="margin-top: 45px; background-color: #33cc33; color: white; padding: 5px;">
-		<h2>Ellison Electronics</h2>
+		<a href="index.jsp"><img src= "images\Gada_logo.png" width="100px" height="100px" style="margin-top:10px; float:left; margin-left:60px;"></a>
+		<h2>Gada Electronics</h2>
 		<h6>We specialize in Electronics</h6>
 		<form class="form-inline" action="index.jsp" method="get">
 			<div class="input-group">
